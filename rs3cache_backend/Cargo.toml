@@ -5,7 +5,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-rs3cache_macros = { path = "../rs3cache_macros", version = "0.1.0" , optional = true}
+rs3cache_macros = { path = "../rs3cache_macros", version = "0.1.0", optional = true }
 rs3cache_utils = { path = "../rs3cache_utils", version = "0.1.0" }
 
 bytes = "1.1.0"
@@ -19,10 +19,11 @@ pyo3 = { version = "0.18", optional = true }
 serde = { version = "1.0.136", features = ["derive"] }
 serde_with = "1.12.0"
 rusqlite = { version = "0.31.0", features = ["bundled"], optional = true }
-libsqlite3-sys = {version = "0.28.0", optional = true }
+libsqlite3-sys = { version = "0.28.0", optional = true }
 console = "0.15.4"
 
-error = {git = "https://github.com/mejrs/error", rev = "82c78704fec42b0c35eb65dd358e9471c42136eb" }
+error = { git = "https://github.com/mejrs/error", rev = "82c78704fec42b0c35eb65dd358e9471c42136eb" }
+serde_json = "1.0.139"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 path-absolutize = "3.0.11"
