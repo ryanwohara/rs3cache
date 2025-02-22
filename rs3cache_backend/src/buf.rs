@@ -57,7 +57,7 @@ pub enum ReadError {
     },
 }
 
-pub trait BufExtra: Buf + Sized {
+pub trait BufExtra: Buf + Sized + Clone {
     #[track_caller]
     #[inline]
     fn try_get_u8(&mut self) -> Result<u8, ReadError> {
@@ -277,9 +277,9 @@ pub trait BufExtra: Buf + Sized {
 
     /// Reads two obfuscated bytes.
     #[inline]
-    fn try_get_masked_index(self) -> Result<u16, ReadError> {
+    fn try_get_masked_index(&mut self) -> Result<u16, ReadError> {
         // big TODO
-        BufExtra::try_get_u16(self)
+        BufExtra::try_get_u16(&mut self)
     }
 
     /// Reads two obfuscated bytes.
