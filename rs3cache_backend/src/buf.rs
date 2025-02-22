@@ -140,7 +140,7 @@ pub trait BufExtra: Buf + Sized + Clone {
             == 0x80;
 
         let ret = if condition {
-            Some(BufExtra::try_get_u32(&mut self)? & 0x7FFFFFFF)
+            Some(BufExtra::try_get_u32(self)? & 0x7FFFFFFF)
         } else {
             let value = BufExtra::try_get_u16(self)? as u32;
             if value == 0x7FFF {
