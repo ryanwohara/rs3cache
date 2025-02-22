@@ -162,7 +162,7 @@ impl Archive {
 
         for i in 0..files_length {
             let header = JagHeader {
-                filename: headers.try_get_i32().context(error::Read { what: "metadata" })?,
+                filename: BufExtra::try_get_i32(&mut headers).context(error::Read { what: "metadata" })?,
                 decompressed_len: BufExtra::try_get_uint(&mut headers, 3).context(error::Read { what: "metadata" })? as u32,
                 compressed_len: BufExtra::try_get_uint(&mut headers, 3).context(error::Read { what: "metadata" })? as u32,
             };
