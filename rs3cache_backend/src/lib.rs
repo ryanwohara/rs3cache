@@ -1,16 +1,6 @@
 //! Core cache interpreting utilities.
 
-#![feature(
-    lint_reasons,
-    error_generic_member_access,
-    error_iter,
-    cfg_eval,
-    try_blocks,
-    array_chunks,
-    if_let_guard,
-    let_chains,
-    error_in_core
-)]
+#![feature(error_generic_member_access, error_iter, cfg_eval, try_blocks, array_chunks, if_let_guard, let_chains)]
 #![allow(clippy::result_large_err)]
 #![warn(
     unused_qualifications,
