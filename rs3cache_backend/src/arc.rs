@@ -133,8 +133,8 @@ impl Archive {
 
         assert_eq!(metadata.index_id(), 0, "called deserialize_jag on data not from index 0");
 
-        let decompressed_len = buffer.try_get_uint(3).context(error::Read { what: "metadata" })?;
-        let compressed_len = buffer.try_get_uint(3).context(error::Read { what: "metadata" })?;
+        let decompressed_len =BufExtra::try_get_uint(3).context(error::Read { what: "metadata" })?;
+        let compressed_len =BufExtra::try_get_uint(3).context(error::Read { what: "metadata" })?;
 
         let extracted = if decompressed_len != compressed_len {
             let mut compressed = bytes::BytesMut::from(b"BZh1".as_slice());
