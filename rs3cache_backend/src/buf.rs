@@ -88,18 +88,18 @@ pub trait BufExtra: Buf + Sized + Clone {
 
     #[track_caller]
     #[inline]
-    fn try_get_i32(&mut self) -> Result<i32, ReadError> {
+    fn try_get_i32(self) -> Result<i32, ReadError> {
         if self.remaining() >= 4 {
-            Ok(self.get_i32())
+            Ok(self.clone().get_i32())
         } else {
             Err(Eof::new(4, self.remaining()))
         }
     }
     #[track_caller]
     #[inline]
-    fn try_get_u32(&mut self) -> Result<u32, ReadError> {
+    fn try_get_u32(self) -> Result<u32, ReadError> {
         if self.remaining() >= 4 {
-            Ok(self.get_u32())
+            Ok(self.clone().get_u32())
         } else {
             Err(Eof::new(4, self.remaining()))
         }
@@ -107,9 +107,9 @@ pub trait BufExtra: Buf + Sized + Clone {
 
     #[track_caller]
     #[inline]
-    fn try_get_uint(&mut self, nbytes: usize) -> Result<u64, ReadError> {
+    fn try_get_uint(self, nbytes: usize) -> Result<u64, ReadError> {
         if self.remaining() >= nbytes {
-            Ok(self.get_uint(nbytes))
+            Ok(self.clone().get_uint(nbytes))
         } else {
             Err(Eof::new(nbytes, self.remaining()))
         }
