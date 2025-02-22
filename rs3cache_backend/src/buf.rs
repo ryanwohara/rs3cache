@@ -132,7 +132,7 @@ pub trait BufExtra: Buf + Sized + Clone {
     /// Reads two or four unsigned bytes as an 32-bit unsigned integer.
     #[track_caller]
     #[inline]
-    fn try_get_smart32(&mut self) -> Result<Option<u32>, ReadError> {
+    fn try_get_smart32(self) -> Result<Option<u32>, ReadError> {
         let condition = self.chunk().first().context(Eof {
             expected: 1,
             found: self.remaining(),
