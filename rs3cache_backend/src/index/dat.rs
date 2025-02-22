@@ -29,8 +29,8 @@ where
             .context(FileSeek)
             .context(error::Read { what: "entry metadata" })?;
         Ok((
-            buf.try_get_uint(3).context(error::Read { what: "entry metadata" })? as u32,
-            buf.try_get_uint(3).context(error::Read { what: "entry metadata" })? as u32,
+            BufExtra::try_get_uint(&mut buf, 3).context(error::Read { what: "entry metadata" })? as u32,
+            BufExtra::try_get_uint(&mut buf, 3).context(error::Read { what: "entry metadata" })? as u32,
         ))
     }
 

@@ -27,8 +27,8 @@ where
         let mut buf = Cursor::new(entry_data);
         buf.seek(SeekFrom::Start((b * 6) as _)).unwrap();
         Ok((
-            buf.try_get_uint(3).context(error::Read { what: "cache entries" })? as u32,
-            buf.try_get_uint(3).context(error::Read { what: "cache entries" })? as u32,
+            BufExtra::try_get_uint(&mut buf, 3).context(error::Read { what: "cache entries" })? as u32,
+            BufExtra::try_get_uint(&mut buf, 3).context(error::Read { what: "cache entries" })? as u32,
         ))
     }
 

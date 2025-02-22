@@ -161,10 +161,10 @@ pub trait BufExtra: Buf + Sized + Clone {
     /// Reads one or two unsigned bytes as an 16-bit unsigned integer.
     #[inline]
     fn try_get_unsigned_smart(&mut self) -> Result<u16, ReadError> {
-        let mut i = self.try_get_u8()? as u16;
+        let mut i = BufExtra::try_get_u8(&mut self)? as u16;
         let ret = if i >= 0x80 {
             i -= 0x80;
-            i << 8 | (self.try_get_u8()? as u16)
+            i << 8 | (BufExtra::try_get_u8(&mut self)? as u16)
         } else {
             i
         };
