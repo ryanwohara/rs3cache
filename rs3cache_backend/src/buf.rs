@@ -142,7 +142,7 @@ pub trait BufExtra: Buf + Sized + Clone {
         let ret = if condition {
             Some(self.try_get_u32()? & 0x7FFFFFFF)
         } else {
-            let value = self.try_get_u16()? as u32;
+            let value = BufExtra::try_get_u16(&mut self)? as u32;
             if value == 0x7FFF {
                 None
             } else {
@@ -279,7 +279,7 @@ pub trait BufExtra: Buf + Sized + Clone {
     #[inline]
     fn try_get_masked_index(&mut self) -> Result<u16, ReadError> {
         // big TODO
-        self.try_get_u16()
+        BufExtra::try_get_u16(&mut self)
     }
 
     /// Reads two obfuscated bytes.
