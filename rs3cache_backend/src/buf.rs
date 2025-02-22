@@ -78,7 +78,7 @@ pub trait BufExtra: Buf + Sized + Clone {
     }
     #[track_caller]
     #[inline]
-    fn try_get_u16(&mut self) -> Result<u16, ReadError> {
+    fn try_get_u16(mut self) -> Result<u16, ReadError> {
         if self.remaining() >= 2 {
             Ok(self.get_u16())
         } else {
