@@ -100,9 +100,6 @@ pub fn export(config: &crate::cli::Config) -> CacheResult<()> {
 
 #[cfg(all(test, feature = "legacy"))]
 mod legacy {
-
-    use rs3cache_backend::index::CacheIndex;
-
     use super::*;
     use crate::cli::Config;
 

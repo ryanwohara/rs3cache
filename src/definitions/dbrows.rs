@@ -91,7 +91,7 @@ impl DbRow {
                                                     buffer.try_get_string()?;
                                                 }
                                                 _ => {
-                                                    buffer.try_get_i32()?;
+                                                    BufExtra::try_get_i32(&mut buffer)?;
                                                 }
                                             }
                                         }

@@ -353,7 +353,7 @@ impl LocationConfig {
 
                     159 => loc.unknown_159 = Some(buffer.try_get_u8()?),
                     160 => loc.unknown_160 = Some(Unknown160::deserialize(&mut buffer)?),
-                    162 => loc.unknown_162 = Some(buffer.try_get_i32()?),
+                    162 => loc.unknown_162 = Some(BufExtra::try_get_i32(&mut buffer)?),
                     163 => loc.unknown_163 = Some(Unknown163::deserialize(&mut buffer)?),
                     164 => loc.unknown_164 = Some(buffer.try_get_u16()?),
                     165 => loc.unknown_166 = Some(buffer.try_get_u16()?),
@@ -918,9 +918,6 @@ impl LocationConfig {
 
 #[cfg(all(test, feature = "legacy"))]
 mod legacy {
-
-    use rs3cache_backend::index::CacheIndex;
-
     use super::*;
     use crate::cli::Config;
 

@@ -200,7 +200,7 @@ impl IndexMetadata {
     pub(crate) fn deserialize(index_id: u32, mut buffer: Bytes) -> Result<Self, ReadError> {
         let format = buffer.try_get_i8()?;
 
-        let _index_utc_stamp = if format > 5 { Some(buffer.try_get_i32()?) } else { None };
+        let _index_utc_stamp = if format > 5 { Some(BufExtra::try_get_i32(&mut buffer)?) } else { None };
 
         let [named, hashed, unk4, ..] = buffer.get_bitflags();
 
@@ -224,19 +224,19 @@ impl IndexMetadata {
         .collect::<Vec<u32>>();
 
         let names = if named {
-            repeat_with(|| try { Some(buffer.try_get_i32()?) })
+            repeat_with(|| try { Some(BufExtra::try_get_i32(&mut buffer)?) })
                 .take(entry_count)
                 .collect::<Result<Vec<Option<i32>>, ReadError>>()?
         } else {
             vec![None; entry_count]
         };
 
-        let crcs = repeat_with(|| buffer.try_get_i32())
+        let crcs = repeat_with(|| BufExtra::try_get_i32(&mut buffer))
             .take(entry_count)
             .collect::<Result<Vec<i32>, ReadError>>()?;
 
         let unknowns = if unk4 {
-            repeat_with(|| try { Some(buffer.try_get_i32()?) })
+            repeat_with(|| try { Some(BufExtra::try_get_i32(&mut buffer)?) })
                 .take(entry_count)
                 .collect::<Result<Vec<Option<i32>>, ReadError>>()?
         } else {
